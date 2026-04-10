@@ -18,19 +18,32 @@ Items::Items(string nom, itemType Type, int quantiteDispo, int Valeur)
     this->Valeur = Valeur;
 }
 
-string Items::getNom() { return nom; }
-int Items::getValeur() { return Valeur; }
-int Items::getQuantite() { return quantiteDispo; }
+string Items::getNom()
+{
+    return nom;
+}
+
+int Items::getValeur()
+{
+    return Valeur;
+}
+
+int Items::getQuantite()
+{
+    return quantiteDispo;
+}
 
 bool Items::Utiliser(Joueur &joueur)
 {
     if (quantiteDispo > 0)
     {
         quantiteDispo--;
+
         if (Type == HEAL)
         {
             joueur.setHP(joueur.getHP() + Valeur);
         }
+
         return true;
     }
 

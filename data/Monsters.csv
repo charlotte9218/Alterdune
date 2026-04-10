@@ -1,4 +1,4 @@
-﻿"BOSS;Maléfique;800;12;8;100;complimenter;moquer;raisonner;epargner
+﻿BOSS;Maléfique;800;12;8;100;complimenter;moquer;raisonner;epargner
 BOSS;Ursula;750;11;7;100;chanter;negocier;flatter;epargner
 BOSS;Dragon Maléfique;1200;15;10;100;esquiver;distraire;courage;epargner
 BOSS;Chernabog;1500;18;12;100;prier;cacher;lumiere;epargner
@@ -11,4 +11,4 @@ BOSS;Horned King;900;13;9;100;defier;detruire_chaudron;braver;epargner
 NORMAL;Gargouille;120;5;3;100;parler;chanter;-;-
 MINIBOSS;Marshmallow;500;10;6;100;calmer;rechauffer;excuser;-
 NORMAL;Monstre Basique;80;3;2;100;rire;complimenter;-;-
-BOSS;Davy Jones;1000;14;9;100;defier;jouer_musique;marchander;epargner"
+BOSS;Davy Jones;1000;14;9;100;defier;jouer_musique;marchander;epargner

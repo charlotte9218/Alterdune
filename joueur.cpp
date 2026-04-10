@@ -1,4 +1,7 @@
 #include "joueur.h"
+#include <iostream>
+
+using namespace std;
 
 Joueur::Joueur() : Entite()
 {
@@ -9,6 +12,26 @@ Joueur::Joueur(string name, int maxHP, int attack, int defense)
     : Entite(name, maxHP, attack, defense)
 {
     victoire = 0;
+}
+
+int Joueur::getHP() const
+{
+    return currentHP;
+}
+
+void Joueur::setHP(int hp)
+{
+    currentHP = hp;
+
+    if (currentHP > maxHP)
+    {
+        currentHP = maxHP;
+    }
+
+    if (currentHP < 0)
+    {
+        currentHP = 0;
+    }
 }
 
 void Joueur::Statistiques()

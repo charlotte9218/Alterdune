@@ -12,6 +12,9 @@ public:
     Joueur();
     Joueur(string name, int maxHP, int attack, int defense);
 
+    int getHP() const;
+    void setHP(int hp);
+
     void Statistiques() override;
 };
 

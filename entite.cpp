@@ -28,13 +28,22 @@ void Entite::Damage(int degats)
     }
 }
 
-int Entite::getHP() const { return currentHP; }
+int Entite::getHP() const
+{
+    return currentHP;
+}
 
 void Entite::setHP(int hp)
 {
     currentHP = hp;
+
     if (currentHP > maxHP)
     {
         currentHP = maxHP;
+    }
+
+    if (currentHP < 0)
+    {
+        currentHP = 0;
     }
 }
