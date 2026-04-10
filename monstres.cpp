@@ -27,3 +27,9 @@ void Monstres::Statistiques()
     cout << "DEF : " << defense << endl;
     cout << "Mercy : " << JaugeMercy << "/" << MercyGoal << endl;
 }
+
+void Monstres::modifierMercy(int valeur) {
+    JaugeMercy += valeur;
+    if (JaugeMercy > MercyGoal) JaugeMercy = MercyGoal;
+    if (JaugeMercy < 0) JaugeMercy = 0;
+}

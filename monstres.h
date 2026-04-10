@@ -3,6 +3,8 @@
 
 #include "entite.h"
 #include "joueur.h"
+#include <string>
+#include <iostream>
 
 class Monstres : public Entite
 {
@@ -12,10 +14,15 @@ private:
 
 public:
     Monstres();
-    Monstres(string name, int maxHP, int attack, int defense, int MercyGoal);
+    Monstres(std::string name, int maxHP, int attack, int defense, int MercyGoal);
 
     void Attaque(Joueur &j);
     void Statistiques() override;
+
+    void modifierMercy(int valeur);
+
+    int getJaugeMercy() const { return JaugeMercy; }
+    int getMercyGoal() const { return MercyGoal; }
 };
 
 #endif
