@@ -18,9 +18,11 @@ protected:
 public:
     Entite();
     Entite(string name, int maxHP, int attack, int defense);
+
+    void Damage(int degats);
     int getHP() const;
     void setHP(int hp);
-    void Damage(int degats);
+
     virtual void Statistiques() = 0;
 };
 
