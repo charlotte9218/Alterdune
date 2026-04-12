@@ -41,7 +41,7 @@ bool Combat::executeCombat()
         // Tour du monstre
         if (monstre->estVivant())
         {
-            appliquerDegat(monstre->Degat(), monstre->getHPRef());
+            appliquerDegat(monstre->Degat(), joueur->getHPRef());
         }
     }
 
@@ -80,7 +80,7 @@ void appliquerDegat(int degat, int &currentHP)
 
 void Combat::handleFight()
 {
-    int d = monstre->Degat();
+    int d = joueur->Degat();
     appliquerDegat(d, monstre->getHPRef());
     if (monstre->getHP() == 0)
     {
