@@ -1,3 +1,4 @@
+
 #ifndef COMBAT_H
 #define COMBAT_H
 
@@ -26,5 +27,4 @@ public:
     Combat(Monstres *m, Joueur *j);
     bool executeCombat();
 };
-
 #endif
