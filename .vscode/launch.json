@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/charl/Documents/Documents_A3/C++/Alterdune",
-      "program": "c:/Users/charl/Documents/Documents_A3/C++/Alterdune/build/Debug/outDebug",
+      "cwd": "c:/Users/charl/Documents/Documents_A3/Alterdune Perso",
+      "program": "c:/Users/charl/Documents/Documents_A3/Alterdune Perso/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
