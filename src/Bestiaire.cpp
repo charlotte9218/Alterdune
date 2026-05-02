@@ -1,51 +1,94 @@
-#include "../include/Bestiaire.h"
 #include <iostream>
+#include "Bestiaire.h"
+
 using namespace std;
 
-Bestiaire::Bestiaire() {}
-
-Bestiaire::~Bestiaire()
+Bestiaires::Bestiaires()
 {
-    for (int i = 0; i < monstresVaincus.size(); i++)
+    NbVaincus = 0;
+}
+
+void Bestiaires::ajouterMonstre(Monstre* m)
+{
+    if (m == nullptr)
     {
-        delete monstresVaincus[i];
+        return;
+    }
+
+    if (!dejaVaincu(m->getNom()))
+    {
+        MonstresVaincus.push_back(m);
+        NbVaincus++;
+        cout << "[Bestiaire] Nouveau monstre enregistre : " << m->getNom() << endl;
+    }
+    else
+    {
+        cout << "[Bestiaire] " << m->getNom() << " est deja dans le bestiaire." << endl;
     }
 }
 
-void Bestiaire::AjouterMonstre(const Monstre* m)
+bool Bestiaires::dejaVaincu(const string& nom) const
 {
-    if (!DejaEnregistre(m->GetNom()))
+    for (int i = 0; i < MonstresVaincus.size(); i++)
     {
-        monstresVaincus.push_back(m->Clone());
-        cout << "[Bestiaire] " << m->GetNom() << " ajouté au bestiaire !" << endl;
-    }
-}
-
-bool Bestiaire::DejaEnregistre(const string& nom) const
-{
-    for (int i = 0; i < monstresVaincus.size(); i++)
-    {
-        if (monstresVaincus[i]->GetNom() == nom)
+        if (MonstresVaincus[i]->getNom() == nom)
+        {
             return true;
+        }
     }
+
     return false;
 }
 
-void Bestiaire::Afficher() const
+Monstre* Bestiaires::chercherMonstre(const string& nom)
 {
-    cout << "\n===== BESTIAIRE =====" << endl;
-    cout << "Monstres découverts : " << monstresVaincus.size() << endl << endl;
+    for (int i = 0; i < MonstresVaincus.size(); i++)
+    {
+        if (MonstresVaincus[i]->getNom() == nom)
+        {
+            return MonstresVaincus[i];
+        }
+    }
 
-    if (monstresVaincus.empty())
+    return nullptr;
+}
+
+int Bestiaires::getNbVaincus() const
+{
+    return NbVaincus;
+}
+
+const vector<Monstre*>& Bestiaires::getMonstres() const
+{
+    return MonstresVaincus;
+}
+
+void Bestiaires::AffichageB() const
+{
+    cout << "===== BESTIAIRE =====" << endl;
+    cout << "Monstres vaincus : " << NbVaincus << endl << endl;
+
+    if (NbVaincus == 0)
     {
         cout << "Aucun monstre vaincu pour l'instant." << endl;
         return;
     }
 
-    for (int i = 0; i < monstresVaincus.size(); i++)
+    for (int i = 0; i < MonstresVaincus.size(); i++)
     {
-        cout << "--- #" << (i + 1) << " ---" << endl;
-        monstresVaincus[i]->afficherStatistiques();
+        cout << "--- Monstre #" << (i + 1) << " ---" << endl;
+        MonstresVaincus[i]->afficherStatistiques();
         cout << endl;
+    }
+}
+
+void Bestiaires::AffichageResume() const
+{
+    cout << "===== BESTIAIRE resume =====" << endl;
+    cout << "Monstres vaincus : " << NbVaincus << endl;
+
+    for (int i = 0; i < MonstresVaincus.size(); i++)
+    {
+        cout << "  - " << MonstresVaincus[i]->getNom() << endl;
     }
 }
