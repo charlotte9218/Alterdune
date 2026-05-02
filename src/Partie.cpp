@@ -187,7 +187,11 @@ void Partie::LancerCombat()
     Combat combat(joueur, monstreCombat, &catalogueAct);
     combat.Lancer();
 
-    delete monstreCombat;
+    if (!monstreCombat->estEnVie() || monstreCombat->peutEtreEpargner())
+    {
+        bestiaire.ajouterMonstre(monstreCombat);
+    }
+
 }
 
 void Partie::LancerJeu()
@@ -202,7 +206,7 @@ void Partie::LancerJeu()
         switch (choix)
         {
         case 1:
-            // Bestiaire
+            bestiaire.AffichageB();
             break;
         case 2:
             LancerCombat();

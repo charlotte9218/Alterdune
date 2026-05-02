@@ -8,6 +8,7 @@
 #include "Boss.h"
 #include "Act.h"
 #include "Combat.h"
+#include "Bestiaire.h"
 
 #include <vector>
 #include <map>
@@ -21,6 +22,7 @@ private:
     Joueur *joueur;
     map<string, Act> catalogueAct;
     vector<Monstre *> listeMonstres;
+    Bestiaires bestiaire;
 
 public:
     Partie();
