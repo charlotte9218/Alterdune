@@ -17,6 +17,8 @@ public:
     Monstre(string nom, int HP_Max, int attaque, int defense, int mercyObjectif, vector<string> actions);
     string getNom() const { return nom; }
     virtual Monstre *Clone() const = 0;
+    int GetMercy();
+    int GetMercyObjectif();
     void modifierMercy(int valeur);
     bool peutEtreEpargner() const;
     void afficherStatistiques() const override;

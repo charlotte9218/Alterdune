@@ -26,7 +26,7 @@ void Combat::ActionFight()
     monstre->subirDegats(degat);
     if (monstre->estEnVie() == false)
     {
-        cout << " Felicitations vous avez tué le monstre !!!" << endl;
+        cout << " Felicitations vous avez tue le monstre !!!" << endl;
         joueur->ajouterVictoire();
         joueur->incrementerTue();
         combatGagne = true;
@@ -39,7 +39,7 @@ void Combat::TourMonstre()
     joueur->subirDegats(degat);
     if (joueur->estEnVie() == false)
     {
-        cout << " Le monstre a gagné la partie !!!" << endl;
+        cout << "Le monstre a gagne la partie !!!" << endl;
         combatGagne = true;
     }
 }
@@ -66,6 +66,7 @@ void Combat::ActionAct()
     Act act = (*catalogueAct)[id];
     act.Afficher();
     monstre->modifierMercy(act.GetImpactMercy());
+    cout << "Mercy : " << monstre->GetMercy() << "/" << monstre->GetMercyObjectif() << endl;
 }
 
 void Combat::ActionItem()
@@ -98,14 +99,14 @@ void Combat::ActionMercy()
     }
     else
     {
-        cout << "Monstre ne peut pas être épargné";
+        cout << "Monstre ne peut pas etre epargne";
     }
 }
 
 void Combat::Lancer()
 {
     int choix;
-    while (joueur->estEnVie() && monstre->estEnVie() && combatGagne == false)
+    while (joueur->estEnVie() == true && monstre->estEnVie() == true && combatGagne == false)
     {
         cout << "Voici les stats du monstre" << endl;
         monstre->afficherStatistiques();

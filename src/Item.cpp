@@ -51,7 +51,7 @@ bool Item::Utiliser()
 
 void Item::AfficherDescription() const
 {
-    if (type == "HEALTH")
+    if (type == "HEAL")
     {
         cout << nom << " soigne " << valeur << " HP." << endl;
     }
