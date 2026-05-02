@@ -30,6 +30,7 @@ void Combat::ActionFight()
         joueur->ajouterVictoire();
         joueur->incrementerTue();
         combatGagne = true;
+        monstre->setResultat("Tue");
     }
 }
 void Combat::TourMonstre()
@@ -96,6 +97,7 @@ void Combat::ActionMercy()
         joueur->ajouterVictoire();
         joueur->incrementerEpargner();
         combatGagne = true;
+        monstre->setResultat("Epargne");
     }
     else
     {

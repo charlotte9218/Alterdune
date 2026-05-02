@@ -168,7 +168,7 @@ void Partie::InitialiserPartie()
     cout << "Entrez le nom du joueur : ";
     cin >> nom;
 
-    joueur = new Joueur(nom, 100, 10, 5, items); // Joueur(string nom, int HP_Max, int attaque, int defense, vector<Item> inventaire)
+    joueur = new Joueur(nom, 1000, 10, 5, items); // Joueur(string nom, int HP_Max, int attaque, int defense, vector<Item> inventaire)
     ChargerMonstres();
 
     AfficherResume();
@@ -240,7 +240,7 @@ void Partie::LancerJeu()
 
 bool Partie::FinPartie() const
 {
-    if (joueur->aGagne() == true)
+    if (joueur->aGagne() == true || joueur->estEnVie() == false)
     {
         return true;
     }
@@ -250,18 +250,26 @@ bool Partie::FinPartie() const
 void Partie::AfficherFin()
 {
     cout << "\n FIN DE LA PARTIE: " << endl;
-    if (joueur->GetNbMonstresEpargnes() == 0)
+    if (joueur->estEnVie() == true)
     {
-        cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
-    }
-    else if (joueur->GetNbMonstreTues() == 0)
-    {
-        cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
+        if (joueur->GetNbMonstresEpargnes() == 0)
+        {
+            cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
+        }
+        else if (joueur->GetNbMonstreTues() == 0)
+        {
+            cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
+        }
+        else
+        {
+            cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
+        }
     }
     else
     {
-        cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
+        cout << "Le monstre a gagne la partie!!!" << endl;
     }
 
+    cout << "Statistiques du Joueur:" << endl;
     joueur->afficherStatistiques();
 }

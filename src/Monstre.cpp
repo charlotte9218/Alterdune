@@ -19,6 +19,15 @@ int Monstre::GetMercyObjectif()
     return mercyObjectif;
 }
 
+void Monstre::setResultat(string r)
+{
+    resultat = r;
+}
+
+string Monstre::getResultat() const
+{
+    return resultat;
+}
 void Monstre::modifierMercy(int valeur)
 {
     mercy += valeur;
