@@ -119,15 +119,19 @@ void Combat::Lancer()
         {
         case 1:
             ActionFight();
+            cout << endl;
             break;
         case 2:
             ActionAct();
+            cout << endl;
             break;
         case 3:
             ActionItem();
+            cout << endl;
             break;
         case 4:
             ActionMercy();
+            cout << endl;
             break;
         default:
             cout << "Choix invalide" << endl;
@@ -136,6 +140,7 @@ void Combat::Lancer()
         if (monstre->estEnVie() && joueur->estEnVie() && !combatGagne)
         {
             joueur->afficherStatistiques();
+            cout << endl;
             TourMonstre();
         }
     }

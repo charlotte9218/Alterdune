@@ -208,28 +208,35 @@ void Partie::LancerJeu()
         {
         case 1:
             bestiaire.AffichageB();
+            cout << endl;
             break;
         case 2:
             LancerCombat();
+            cout << endl;
             break;
         case 3:
             joueur->afficherStatistiques();
+            cout << endl;
             break;
         case 4:
             int valeur;
             bool rep;
             joueur->AfficherInventaire();
+            cout << endl;
             cout << "\nViulez vous utiliser un Item?" << endl;
             cin >> rep;
+            cout << endl;
             if (rep == true)
             {
                 cout << "Rentrer le numero de l'Item" << endl;
                 cin >> valeur;
                 joueur->UtiliserItem(valeur);
+                cout << endl;
             }
             break;
         case 5:
             AfficherFin();
+            cout << endl;
             return;
         default:
             cout << "Choix invalide" << endl;
