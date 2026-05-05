@@ -43,3 +43,13 @@ string Entite::GetNom() const
 {
     return nom;
 }
+
+int Entite::GetAttaque() const
+{
+    return attaque;
+}
+
+void Entite::AugmenterAttaque(int valeur)
+{
+    attaque = attaque + valeur;
+}

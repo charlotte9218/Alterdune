@@ -9,25 +9,6 @@ Monstre::Monstre(string nom, int HP_Max, int attaque, int defense, int mercyObje
     this->actionsDisponibles = actions;
 }
 
-int Monstre::GetMercy()
-{
-    return mercy;
-}
-
-int Monstre::GetMercyObjectif()
-{
-    return mercyObjectif;
-}
-
-void Monstre::setResultat(string r)
-{
-    resultat = r;
-}
-
-string Monstre::getResultat() const
-{
-    return resultat;
-}
 void Monstre::modifierMercy(int valeur)
 {
     mercy += valeur;

@@ -22,15 +22,15 @@ void Combat::AfficherMenu() const
 void Combat::ActionFight()
 {
     int degat = rand() % (monstre->GetHPMax() + 1);
+    degat = degat + joueur->GetAttaque();
     cout << "Vous attaquer le monstre qui subit: " << degat << " HP." << endl;
     monstre->subirDegats(degat);
     if (monstre->estEnVie() == false)
     {
-        cout << " Felicitations vous avez tue le monstre !!!" << endl;
+        cout << " Felicitations vous avez tué le monstre !!!" << endl;
         joueur->ajouterVictoire();
         joueur->incrementerTue();
         combatGagne = true;
-        monstre->setResultat("Tue");
     }
 }
 void Combat::TourMonstre()
@@ -40,7 +40,7 @@ void Combat::TourMonstre()
     joueur->subirDegats(degat);
     if (joueur->estEnVie() == false)
     {
-        cout << "Le monstre a gagne la partie !!!" << endl;
+        cout << " Le monstre a gagné la partie !!!" << endl;
         combatGagne = true;
     }
 }
@@ -67,7 +67,6 @@ void Combat::ActionAct()
     Act act = (*catalogueAct)[id];
     act.Afficher();
     monstre->modifierMercy(act.GetImpactMercy());
-    cout << "Mercy : " << monstre->GetMercy() << "/" << monstre->GetMercyObjectif() << endl;
 }
 
 void Combat::ActionItem()
@@ -82,6 +81,7 @@ void Combat::ActionItem()
     if (joueur->UtiliserItem(item) == true)
     {
         cout << "Item utilise avec succes !" << endl;
+        joueur->afficherStatistiques();
     }
     else
     {
@@ -97,18 +97,17 @@ void Combat::ActionMercy()
         joueur->ajouterVictoire();
         joueur->incrementerEpargner();
         combatGagne = true;
-        monstre->setResultat("Epargne");
     }
     else
     {
-        cout << "Monstre ne peut pas etre epargne";
+        cout << "Monstre ne peut pas être épargné";
     }
 }
 
 void Combat::Lancer()
 {
     int choix;
-    while (joueur->estEnVie() == true && monstre->estEnVie() == true && combatGagne == false)
+    while (joueur->estEnVie() && monstre->estEnVie() && combatGagne == false)
     {
         cout << "Voici les stats du monstre" << endl;
         monstre->afficherStatistiques();
@@ -119,19 +118,15 @@ void Combat::Lancer()
         {
         case 1:
             ActionFight();
-            cout << endl;
             break;
         case 2:
             ActionAct();
-            cout << endl;
             break;
         case 3:
             ActionItem();
-            cout << endl;
             break;
         case 4:
             ActionMercy();
-            cout << endl;
             break;
         default:
             cout << "Choix invalide" << endl;
@@ -140,7 +135,6 @@ void Combat::Lancer()
         if (monstre->estEnVie() && joueur->estEnVie() && !combatGagne)
         {
             joueur->afficherStatistiques();
-            cout << endl;
             TourMonstre();
         }
     }

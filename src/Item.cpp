@@ -53,6 +53,14 @@ void Item::AfficherDescription() const
 {
     if (type == "HEAL")
     {
-        cout << nom << " soigne " << valeur << " HP." << endl;
+        cout << nom << " soigne " << valeur << " HP. Quantite : " << quantite;
+    }
+    else if (type == "ATTACK")
+    {
+        cout << nom << " augmente l'attaque de " << valeur << ". Quantite : " << quantite;
+    }
+    else
+    {
+        cout << nom << " type inconnu : " << type << ". Quantite : " << quantite;
     }
 }

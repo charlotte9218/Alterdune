@@ -139,10 +139,11 @@ void Partie::ChargerMonstres()
 
 void Partie::AfficherResume()
 {
-    cout << "Resume du Joueur : " << endl;
+    cout << "Resume : " << endl;
     joueur->afficherStatistiques();
 
-    cout << "\nInventaire: " << endl;
+    cout << " Inventaire " << "\n"
+         << endl;
     joueur->AfficherInventaire();
 }
 
@@ -150,10 +151,7 @@ void Partie::AfficherMenu()
 {
     cout << "\n===== MENU PRINCIPAL =====" << endl;
     cout << "1. Bestiaire" << endl;
-    if (joueur->estEnVie() == true)
-    {
-        cout << "2. Demarrer un combat" << endl;
-    }
+    cout << "2. Demarrer un combat" << endl;
     cout << "3. Statistiques du personnage" << endl;
     cout << "4. Items" << endl;
     cout << "5. Quitter" << endl;
@@ -193,6 +191,7 @@ void Partie::LancerCombat()
     {
         bestiaire.ajouterMonstre(monstreCombat);
     }
+
 }
 
 void Partie::LancerJeu()
@@ -208,35 +207,18 @@ void Partie::LancerJeu()
         {
         case 1:
             bestiaire.AffichageB();
-            cout << endl;
             break;
         case 2:
             LancerCombat();
-            cout << endl;
             break;
         case 3:
             joueur->afficherStatistiques();
-            cout << endl;
             break;
         case 4:
-            int valeur;
-            bool rep;
             joueur->AfficherInventaire();
-            cout << endl;
-            cout << "\nViulez vous utiliser un Item?" << endl;
-            cin >> rep;
-            cout << endl;
-            if (rep == true)
-            {
-                cout << "Rentrer le numero de l'Item" << endl;
-                cin >> valeur;
-                joueur->UtiliserItem(valeur);
-                cout << endl;
-            }
             break;
         case 5:
             AfficherFin();
-            cout << endl;
             return;
         default:
             cout << "Choix invalide" << endl;
@@ -247,7 +229,7 @@ void Partie::LancerJeu()
 
 bool Partie::FinPartie() const
 {
-    if (joueur->aGagne() == true || joueur->estEnVie() == false)
+    if (joueur->aGagne() == true)
     {
         return true;
     }
@@ -257,26 +239,19 @@ bool Partie::FinPartie() const
 void Partie::AfficherFin()
 {
     cout << "\n FIN DE LA PARTIE: " << endl;
-    if (joueur->estEnVie() == true)
+
+    if (joueur->GetNbMonstresEpargnes() == 0)
     {
-        if (joueur->GetNbMonstresEpargnes() == 0)
-        {
-            cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
-        }
-        else if (joueur->GetNbMonstreTues() == 0)
-        {
-            cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
-        }
-        else
-        {
-            cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
-        }
+        cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
+    }
+    else if (joueur->GetNbMonstreTues() == 0)
+    {
+        cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
     }
     else
     {
-        cout << "Le monstre a gagne la partie!!!" << endl;
+        cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
     }
 
-    cout << "Statistiques du Joueur:" << endl;
     joueur->afficherStatistiques();
 }

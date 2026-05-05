@@ -23,6 +23,7 @@ void Joueur::afficherStatistiques() const
 {
     cout << "Nom: " << nom << endl;
     cout << "HP: " << HP_Actuel << " / " << HP_Max << endl;
+    cout << "Attaque" << attaque << endl;
     cout << "Victoires: " << nbVictoires << endl;
     cout << "Monstres tues: " << nbMonstreTues << endl;
     cout << "Monstres epargnes: " << nbMonstresEpargnes << endl;
@@ -30,13 +31,11 @@ void Joueur::afficherStatistiques() const
 
 void Joueur::AfficherInventaire() const
 {
-    for (int i = 0; i < inventaire.size(); i++)
+     for (int i = 0; i < inventaire.size(); i++)
     {
-        if (inventaire[i].EstDisponible())
-        {
-            cout << i << " : "; // Plus simple pour que l'utilisateur puisse chosir un Item
-            inventaire[i].AfficherDescription();
-        }
+        cout << i << " : ";
+        inventaire[i].AfficherDescription();
+        cout << endl;
     }
 }
 
@@ -52,18 +51,40 @@ bool Joueur::UtiliserItem(int index)
         return false;
     }
 
+    string type = inventaire[index].GetType();
+    int valeur = inventaire[index].GetValeur();
+
     inventaire[index].Utiliser();
 
-    HP_Actuel += inventaire[index].GetValeur();
-
-    if (HP_Actuel > HP_Max)
+    if (type == "HEAL")
     {
-        HP_Actuel = HP_Max;
+        cout << "HP avant item : " << HP_Actuel << endl;
+
+        HP_Actuel += valeur;
+
+        if (HP_Actuel > HP_Max)
+        {
+            HP_Actuel = HP_Max;
+        }
+
+        cout << "Vous recuperez " << valeur << " HP." << endl;
+        cout << "HP apres item : " << HP_Actuel << endl;
+
+        return true;
     }
+    else if (type == "ATTACK")
+    {
+        cout << "Attaque avant item : " << attaque << endl;
 
-    return true;
+        AugmenterAttaque(valeur);
+
+        cout << "Votre attaque augmente de " << valeur << " points." << endl;
+        cout << "Attaque apres item : " << attaque << endl;
+
+        return true;
+    }
+    return false;
 }
-
 void Joueur::ajouterVictoire()
 {
     nbVictoires++;

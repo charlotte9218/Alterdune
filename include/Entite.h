@@ -21,5 +21,7 @@ public:
     int GetHPMax() const;
     string GetNom() const;
     virtual void afficherStatistiques() const = 0;
+    int GetAttaque() const;
+    void AugmenterAttaque(int valeur);
 };
 #endif

@@ -15,8 +15,3 @@ Monstre *MiniBoss::Clone() const
 {
     return new MiniBoss(*this);
 }
-
-string MiniBoss::GetCategorie() const
-{
-    return "MINIBOSS";
-}

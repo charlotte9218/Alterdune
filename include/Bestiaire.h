@@ -10,18 +10,18 @@ using namespace std;
 class Bestiaires
 {
 private:
-    vector<Monstre *> MonstresVaincus;
+    vector<Monstre*> MonstresVaincus;
     int NbVaincus;
 
 public:
     Bestiaires();
 
-    void ajouterMonstre(Monstre *m);
-    bool dejaVaincu(const string &nom) const;
-    Monstre *chercherMonstre(const string &nom);
+    void ajouterMonstre(Monstre* m);
+    bool dejaVaincu(const string& nom) const;
+    Monstre* chercherMonstre(const string& nom);
 
     int getNbVaincus() const;
-    const vector<Monstre *> &getMonstres() const;
+    const vector<Monstre*>& getMonstres() const;
 
     void AffichageB() const;
     void AffichageResume() const;

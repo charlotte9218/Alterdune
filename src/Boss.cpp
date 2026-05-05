@@ -14,8 +14,3 @@ Monstre *Boss::Clone() const
 {
     return new Boss(*this);
 }
-
-string Boss::GetCategorie() const
-{
-    return "BOSS";
-}

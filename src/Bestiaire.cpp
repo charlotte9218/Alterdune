@@ -8,7 +8,7 @@ Bestiaires::Bestiaires()
     NbVaincus = 0;
 }
 
-void Bestiaires::ajouterMonstre(Monstre *m)
+void Bestiaires::ajouterMonstre(Monstre* m)
 {
     if (m == nullptr)
     {
@@ -27,7 +27,7 @@ void Bestiaires::ajouterMonstre(Monstre *m)
     }
 }
 
-bool Bestiaires::dejaVaincu(const string &nom) const
+bool Bestiaires::dejaVaincu(const string& nom) const
 {
     for (int i = 0; i < MonstresVaincus.size(); i++)
     {
@@ -40,7 +40,7 @@ bool Bestiaires::dejaVaincu(const string &nom) const
     return false;
 }
 
-Monstre *Bestiaires::chercherMonstre(const string &nom)
+Monstre* Bestiaires::chercherMonstre(const string& nom)
 {
     for (int i = 0; i < MonstresVaincus.size(); i++)
     {
@@ -58,7 +58,7 @@ int Bestiaires::getNbVaincus() const
     return NbVaincus;
 }
 
-const vector<Monstre *> &Bestiaires::getMonstres() const
+const vector<Monstre*>& Bestiaires::getMonstres() const
 {
     return MonstresVaincus;
 }
@@ -66,8 +66,7 @@ const vector<Monstre *> &Bestiaires::getMonstres() const
 void Bestiaires::AffichageB() const
 {
     cout << "===== BESTIAIRE =====" << endl;
-    cout << "Monstres vaincus : " << NbVaincus << endl
-         << endl;
+    cout << "Monstres vaincus : " << NbVaincus << endl << endl;
 
     if (NbVaincus == 0)
     {
@@ -79,8 +78,6 @@ void Bestiaires::AffichageB() const
     {
         cout << "--- Monstre #" << (i + 1) << " ---" << endl;
         MonstresVaincus[i]->afficherStatistiques();
-        cout << "categorie: " << MonstresVaincus[i]->GetCategorie() << endl;
-        cout << "Resultat : " << MonstresVaincus[i]->getResultat() << endl;
         cout << endl;
     }
 }
