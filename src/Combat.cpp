@@ -30,6 +30,7 @@ void Combat::ActionFight()
         cout << " Felicitations vous avez tué le monstre !!!" << endl;
         joueur->ajouterVictoire();
         joueur->incrementerTue();
+        monstre->setResultat("Tue");
         combatGagne = true;
     }
 }
@@ -96,6 +97,7 @@ void Combat::ActionMercy()
         cout << "Vous epargnez le monstre !" << endl;
         joueur->ajouterVictoire();
         joueur->incrementerEpargner();
+        monstre->setResultat("Epargne");
         combatGagne = true;
     }
     else

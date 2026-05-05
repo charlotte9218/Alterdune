@@ -15,3 +15,7 @@ Monstre *Normal::Clone() const
 {
     return new Normal(*this);
 }
+string Normal::GetCategorie() const
+{
+    return "NORMAL";
+}

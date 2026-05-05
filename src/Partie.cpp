@@ -191,7 +191,6 @@ void Partie::LancerCombat()
     {
         bestiaire.ajouterMonstre(monstreCombat);
     }
-
 }
 
 void Partie::LancerJeu()
@@ -216,6 +215,16 @@ void Partie::LancerJeu()
             break;
         case 4:
             joueur->AfficherInventaire();
+            bool use;
+            cout << "Voulez vous utiliser l'item" << endl;
+            cin >> use;
+            if (use == true)
+            {
+                int num;
+                cout << "Rentrer le numero de l'Item" << endl;
+                cin >> num;
+                joueur->UtiliserItem(num);
+            }
             break;
         case 5:
             AfficherFin();
@@ -229,7 +238,7 @@ void Partie::LancerJeu()
 
 bool Partie::FinPartie() const
 {
-    if (joueur->aGagne() == true)
+    if (joueur->aGagne() == true || joueur->estEnVie() == false)
     {
         return true;
     }
@@ -239,19 +248,26 @@ bool Partie::FinPartie() const
 void Partie::AfficherFin()
 {
     cout << "\n FIN DE LA PARTIE: " << endl;
-
-    if (joueur->GetNbMonstresEpargnes() == 0)
+    if (joueur->estEnVie() == true)
     {
-        cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
-    }
-    else if (joueur->GetNbMonstreTues() == 0)
-    {
-        cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
+        if (joueur->GetNbMonstresEpargnes() == 0)
+        {
+            cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
+        }
+        else if (joueur->GetNbMonstreTues() == 0)
+        {
+            cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
+        }
+        else
+        {
+            cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
+        }
     }
     else
     {
-        cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
+        cout << "Le monstre a gagne la partie!!!" << endl;
     }
 
+    cout << "Statistiques du Joueur:" << endl;
     joueur->afficherStatistiques();
 }
