@@ -21,13 +21,12 @@ void Combat::AfficherMenu() const
 
 void Combat::ActionFight()
 {
-    int degat = rand() % (monstre->GetHPMax() + 1);
-    degat = degat + joueur->GetAttaque();
+    int degat = rand() % (joueur->GetAttaque() + 1);
     cout << "Vous attaquer le monstre qui subit: " << degat << " HP." << endl;
     monstre->subirDegats(degat);
     if (monstre->estEnVie() == false)
     {
-        cout << " Felicitations vous avez tué le monstre !!!" << endl;
+        cout << " Felicitations vous avez tue le monstre !!!" << endl;
         joueur->ajouterVictoire();
         joueur->incrementerTue();
         monstre->setResultat("Tue");
@@ -36,12 +35,12 @@ void Combat::ActionFight()
 }
 void Combat::TourMonstre()
 {
-    int degat = rand() % (joueur->GetHPMax() + 1);
+    int degat = rand() % (monstre->GetAttaque() + 1);
     cout << "Le monstre attaque  le joueur qui subit: " << degat << " HP." << endl;
     joueur->subirDegats(degat);
     if (joueur->estEnVie() == false)
     {
-        cout << " Le monstre a gagné la partie !!!" << endl;
+        cout << " Le monstre a gagne la partie !!!" << endl;
         combatGagne = true;
     }
 }
@@ -102,7 +101,7 @@ void Combat::ActionMercy()
     }
     else
     {
-        cout << "Monstre ne peut pas être épargné";
+        cout << "Monstre ne peut pas être epargne";
     }
 }
 

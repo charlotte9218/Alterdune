@@ -41,98 +41,153 @@ vector<Item> Partie::ChargerItems()
     // ouverture du fichier
     ifstream fichier("data/Items.csv");
 
+    // verification que le fichier est bien ouvert
     if (!fichier.is_open())
-    { // verification que le fichier est bien ouvert
-        cout << "Erreur : impossible d'ouvrir data/items.csv" << endl;
+    {
+        cout << "Erreur : impossible d'ouvrir data/Items.csv" << endl;
         return items;
     }
 
     // lecture ligne par ligne du fichier
     string ligne;
+
     while (getline(fichier, ligne))
     {
-        stringstream ss(ligne);
+        try
+        {
+            stringstream ss(ligne);
 
-        string nom, type; // on stocke chaque champ séparément
-        string valeurStr, quantiteStr;
+            // on stocke chaque champ séparément
+            string nom, type;
+            string valeurStr, quantiteStr;
 
-        getline(ss, nom, ';'); // découpage du csv et récupèration des informations
-        getline(ss, type, ';');
-        getline(ss, valeurStr, ';'); // récupération des nombres sous forme de string
-        getline(ss, quantiteStr, ';');
+            // découpage du csv et récupèration des informations
+            getline(ss, nom, ';');
+            getline(ss, type, ';');
 
-        int valeur = stoi(valeurStr); // changement de string en int
-        int quantite = stoi(quantiteStr);
+            // récupération des nombres sous forme de string
+            getline(ss, valeurStr, ';');
+            getline(ss, quantiteStr, ';');
 
-        Item item(nom, type, valeur, quantite); // creation d'un item
-        items.push_back(item);                  // ajoute l'item dans la liste
+            // changement de string en int
+            int valeur = stoi(valeurStr);
+            int quantite = stoi(quantiteStr);
+
+            // creation d'un item
+            Item item(nom, type, valeur, quantite);
+
+            // ajoute l'item dans la liste
+            items.push_back(item);
+        }
+
+        // gestion des erreurs de conversion
+        catch (const invalid_argument &e)
+        {
+            cout << "Erreur de conversion dans la ligne : "
+                 << ligne << endl;
+
+            cout << e.what() << endl;
+        }
     }
+
     return items;
 }
 
 void Partie::ChargerMonstres()
 {
+    // ouverture du fichier
     ifstream fichier("data/Monsters.csv");
+
+    // verification que le fichier est bien ouvert
     if (!fichier.is_open())
     {
         cout << "Erreur : impossible d'ouvrir data/Monsters.csv" << endl;
         return;
     }
+
+    // lecture ligne par ligne du fichier
     string ligne;
 
     while (getline(fichier, ligne))
     {
-        stringstream ss(ligne);
-        string categorie, nom;
-        string hpStr, atkStr, defStr, mercyStr;
-        string act1, act2, act3, act4;
+        try
+        {
+            stringstream ss(ligne);
 
-        getline(ss, categorie, ';');
-        getline(ss, nom, ';');
-        getline(ss, hpStr, ';');
-        getline(ss, atkStr, ';');
-        getline(ss, defStr, ';');
-        getline(ss, mercyStr, ';');
-        getline(ss, act1, ';');
-        getline(ss, act2, ';');
-        getline(ss, act3, ';');
-        getline(ss, act4, ';');
+            // on stocke chaque champ séparément
+            string categorie, nom;
+            string hpStr, atkStr, defStr, mercyStr;
+            string act1, act2, act3, act4;
 
-        int hp = stoi(hpStr);
-        int atk = stoi(atkStr);
-        int def = stoi(defStr);
-        int mercyObjectif = stoi(mercyStr);
+            // découpage du csv et récupèration des informations
+            getline(ss, categorie, ';');
+            getline(ss, nom, ';');
+            getline(ss, hpStr, ';');
+            getline(ss, atkStr, ';');
+            getline(ss, defStr, ';');
+            getline(ss, mercyStr, ';');
+            getline(ss, act1, ';');
+            getline(ss, act2, ';');
+            getline(ss, act3, ';');
+            getline(ss, act4, ';');
 
-        vector<string> actions;
+            // changement de string en int
+            int hp = stoi(hpStr);
+            int atk = stoi(atkStr);
+            int def = stoi(defStr);
+            int mercyObjectif = stoi(mercyStr);
 
-        if (act1 != "-")
-        {
-            actions.push_back(act1);
-        }
-        if (act2 != "-")
-        {
-            actions.push_back(act2);
-        }
-        if (act3 != "-")
-        {
-            actions.push_back(act3);
-        }
-        if (act4 != "-")
-        {
-            actions.push_back(act4);
+            // creation du tableau dynamique d'actions
+            vector<string> actions;
+
+            // ajout des actions disponibles
+            if (act1 != "-")
+            {
+                actions.push_back(act1);
+            }
+
+            if (act2 != "-")
+            {
+                actions.push_back(act2);
+            }
+
+            if (act3 != "-")
+            {
+                actions.push_back(act3);
+            }
+
+            if (act4 != "-")
+            {
+                actions.push_back(act4);
+            }
+
+            // creation du bon type de monstre
+            if (categorie == "NORMAL")
+            {
+                listeMonstres.push_back(
+                    new Normal(nom, hp, atk, def, mercyObjectif, actions));
+            }
+
+            else if (categorie == "MINIBOSS")
+            {
+                listeMonstres.push_back(
+                    new MiniBoss(nom, hp, atk, def, mercyObjectif, actions));
+            }
+
+            else if (categorie == "BOSS")
+            {
+                listeMonstres.push_back(
+                    new Boss(nom, hp, atk, def, mercyObjectif, actions));
+            }
         }
 
-        if (categorie == "NORMAL")
+        // gestion des erreurs de conversion
+        catch (const invalid_argument &e)
         {
-            listeMonstres.push_back(new Normal(nom, hp, atk, def, mercyObjectif, actions));
-        }
-        else if (categorie == "MINIBOSS")
-        {
-            listeMonstres.push_back(new MiniBoss(nom, hp, atk, def, mercyObjectif, actions));
-        }
-        else if (categorie == "BOSS")
-        {
-            listeMonstres.push_back(new Boss(nom, hp, atk, def, mercyObjectif, actions));
+            cout << "Erreur de conversion dans la ligne : "
+                 << ligne << endl;
+
+            cout << e.what() << endl;
         }
     }
 }
@@ -166,7 +221,7 @@ void Partie::InitialiserPartie()
     cout << "Entrez le nom du joueur : ";
     cin >> nom;
 
-    joueur = new Joueur(nom, 1000, 10, 5, items); // Joueur(string nom, int HP_Max, int attaque, int defense, vector<Item> inventaire)
+    joueur = new Joueur(nom, 1000, 350, 5, items); // Joueur(string nom, int HP_Max, int attaque, int defense, vector<Item> inventaire)
     ChargerMonstres();
 
     AfficherResume();
@@ -215,10 +270,16 @@ void Partie::LancerJeu()
             break;
         case 4:
             joueur->AfficherInventaire();
-            bool use;
-            cout << "Voulez vous utiliser l'item" << endl;
-            cin >> use;
-            if (use == true)
+            char c;
+            cout << "Voulez vous utiliser l'item(O/N)" << endl;
+            cin >> c;
+            if (c != 'O' || c != 'N')
+            {
+                cout << "Votre réponse est différente de O ou N" << endl;
+                cout << "Voulez vous utiliser l'item(O/N)" << endl;
+                cin >> c;
+            }
+            if (c == 'O')
             {
                 int num;
                 cout << "Rentrer le numero de l'Item" << endl;
@@ -227,9 +288,12 @@ void Partie::LancerJeu()
             }
             break;
         case 5:
+
             AfficherFin();
             return;
+
         default:
+
             cout << "Choix invalide" << endl;
         }
     }
@@ -250,17 +314,21 @@ void Partie::AfficherFin()
     cout << "\n FIN DE LA PARTIE: " << endl;
     if (joueur->estEnVie() == true)
     {
-        if (joueur->GetNbMonstresEpargnes() == 0)
+        if (joueur->GetNbMonstresEpargnes() == 0 && joueur->GetNbMonstreTues() == 10)
         {
             cout << "Fin Genocidaire : vous avez tue tous les monstres vaincus." << endl;
         }
-        else if (joueur->GetNbMonstreTues() == 0)
+        else if (joueur->GetNbMonstreTues() == 0 && joueur->GetNbMonstresEpargnes() == 0)
         {
             cout << "Fin Pacifiste : vous avez epargne tous les monstres vaincus." << endl;
         }
-        else
+        else if (joueur->GetNbMonstreTues() + joueur->GetNbMonstresEpargnes() == 10)
         {
             cout << "Fin Neutre : vous avez tue et epargne des monstres." << endl;
+        }
+        else
+        {
+            cout << "Vous avez quitter le jeu" << endl;
         }
     }
     else
